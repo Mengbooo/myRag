@@ -6,6 +6,7 @@ export interface VectorMetadata {
   source: string;
   chunkIndex: number;
   createdAt: string;
+  [key: string]: string | number; // Index signature for Pinecone compatibility
 }
 
 export interface PineconeVector {
@@ -35,7 +36,7 @@ export async function upsertVector(
   index: ReturnType<Pinecone['index']>,
   vectors: PineconeVector[]
 ): Promise<void> {
-  await index.upsert(vectors);
+  await index.upsert(vectors as any);
 }
 
 export async function queryVector(
@@ -48,26 +49,4 @@ export async function queryVector(
     topK,
     includeMetadata: true,
   });
-}
-
-export interface CreateIndexOptions {
-  dimension: number;
-  metric?: 'cosine' | 'euclidean' | 'dotproduct';
-}
-
-export async function createIndexIfNotExists(
-  client: Pinecone,
-  name: string,
-  opts: CreateIndexOptions
-): Promise<void> {
-  const existingIndexes = await client.listIndexes();
-  const exists = existingIndexes.indexes?.some((idx) => idx.name === name);
-
-  if (!exists) {
-    await client.createIndex({
-      name,
-      dimension: opts.dimension,
-      metric: opts.metric || 'cosine',
-    });
-  }
 }

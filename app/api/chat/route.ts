@@ -33,11 +33,11 @@ export async function POST(request: NextRequest) {
 
     const sources: Source[] = queryResult.matches?.map((match) => ({
       id: match.id,
-      text: match.metadata?.text || '',
+      text: String(match.metadata?.text || ''),
       score: match.score || 0,
       metadata: {
-        source: match.metadata?.source || 'unknown',
-        chunkIndex: match.metadata?.chunkIndex || 0,
+        source: String(match.metadata?.source || 'unknown'),
+        chunkIndex: Number(match.metadata?.chunkIndex || 0),
       },
     })) || [];
 
