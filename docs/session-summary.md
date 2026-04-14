@@ -24,6 +24,7 @@
 ### Git 提交记录
 - `67ed8cd` - feat: initialize Next.js project
 - `62d7ada` - docs: add CLAUDE.md and .claude/memory for project persistence
+- `a3fe479` - feat: add MiniMax API client and environment config
 
 ### 当前项目状态
 - GitHub: https://github.com/Mengbooo/myRag.git
@@ -37,7 +38,9 @@ myRag/
 │   ├── layout.tsx
 │   └── page.tsx
 ├── components/ (空)
-├── lib/ (空)
+├── lib/
+│   ├── minimax.ts       ✅
+│   └── minimax.test.ts  ✅
 ├── docs/
 │   ├── session-summary.md (本文件)
 │   └── superpowers/
@@ -45,16 +48,18 @@ myRag/
 │       └── plans/2026-04-14-rag-mvp-implementation-plan.md
 ├── .claude/memory/
 ├── .gitignore
+├── .env.local          ✅ (包含实际 API keys)
+├── jest.config.js       ✅
 ├── package.json
 ├── tsconfig.json
 └── next.config.js
 ```
 
-### 待完成任务 (11/12)
+### 待完成任务 (9/12)
 | Task | 内容 | 状态 |
 |------|------|------|
-| 2 | Create Environment Configuration | pending |
-| 3 | Implement MiniMax API Client | pending |
+| 2 | Create Environment Configuration | ✅ completed |
+| 3 | Implement MiniMax API Client | ✅ completed |
 | 4 | Implement Pinecone Client | pending |
 | 5 | Implement Text Chunking | pending |
 | 6 | Implement Upload API | pending |
